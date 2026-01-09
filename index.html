@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spike Feeder - Bearded Dragon Food Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Spike Feeder</h1>
+            <p class="subtitle">Bearded Dragon Weekly Food Calculator</p>
+        </header>
+
+        <div class="dragon-container">
+            <pre id="dragon-art" class="dragon neutral"></pre>
+            <p id="dragon-status" class="status-text">Feed me some bugs!</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <div class="progress-labels">
+                <span>0%</span>
+                <span id="progress-text">0 / 20 cricket equivalents</span>
+                <span>100%+</span>
+            </div>
+        </div>
+
+        <div class="food-inputs">
+            <h2>Food Intake</h2>
+            <div id="food-list"></div>
+        </div>
+
+        <div class="totals">
+            <h3>Total: <span id="total-value">0</span> cricket equivalents</h3>
+        </div>
+
+        <button id="settings-btn" class="settings-btn" title="Settings">
+            &#9881;
+        </button>
+
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Settings</h2>
+                <button id="close-modal" class="close-btn">&times;</button>
+                
+                <div class="setting-group">
+                    <label for="weekly-goal">Weekly Goal (cricket equivalents):</label>
+                    <input type="number" id="weekly-goal" min="1" value="20">
+                </div>
+
+                <h3>Food Conversion Rates</h3>
+                <p class="help-text">1 of this food = X cricket equivalents</p>
+                <div id="conversion-list"></div>
+
+                <div class="add-food-section">
+                    <h4>Add New Food Type</h4>
+                    <input type="text" id="new-food-name" placeholder="Food name">
+                    <input type="number" id="new-food-value" placeholder="Cricket equivalents" min="0.1" step="0.1">
+                    <button id="add-food-btn">Add Food</button>
+                </div>
+
+                <button id="save-settings" class="save-btn">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
