@@ -105,9 +105,12 @@ function updateDisplay() {
     
     // Create goal spaces between start and end (total goal+1 ticks)
     for (let i = 0; i <= goal; i++) {
-        const tick = document.createElement('div');
-        tick.className = 'tick';
-        ticksContainer.appendChild(tick);
+        // Skip first and last ticks to avoid the rounded edges
+        if (i > 0 && i < goal) {
+            const tick = document.createElement('div');
+            tick.className = 'tick';
+            ticksContainer.appendChild(tick);
+        }
         
         if (i < goal) {
             const spacer = document.createElement('div');
