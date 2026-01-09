@@ -88,10 +88,18 @@ function updateDisplay() {
     // Update ticks
     const ticksContainer = document.getElementById('progress-ticks');
     ticksContainer.innerHTML = '';
-    for (let i = 0; i <= goal; i++) {
-        const tick = document.createElement('div');
-        tick.className = 'tick';
-        ticksContainer.appendChild(tick);
+    
+    // Create goal - 1 spaces between start and end
+    for (let i = 0; i < goal; i++) {
+        const spacer = document.createElement('div');
+        spacer.style.flex = "1";
+        ticksContainer.appendChild(spacer);
+        
+        if (i < goal - 1) {
+            const tick = document.createElement('div');
+            tick.className = 'tick';
+            ticksContainer.appendChild(tick);
+        }
     }
 }
 

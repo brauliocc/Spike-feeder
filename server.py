@@ -1,5 +1,6 @@
 import http.server
 import socketserver
+import socket
 
 PORT = 5000
 HOST = "0.0.0.0"
@@ -11,6 +12,9 @@ class NoCacheHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Expires', '0')
         super().end_headers()
 
-with socketserver.TCPServer((HOST, PORT), NoCacheHTTPRequestHandler) as httpd:
+class ReuseAddrServer(socketserver.TCPServer):
+    allow_reuse_address = True
+
+with ReuseAddrServer((HOST, PORT), NoCacheHTTPRequestHandler) as httpd:
     print(f"Serving at http://{HOST}:{PORT}")
     httpd.serve_forever()
