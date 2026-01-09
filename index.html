@@ -45,13 +45,15 @@
 
                 <h3>Food Conversion Rates</h3>
                 <p class="help-text">1 of this food = X crickets</p>
-                <div id="conversion-list"></div>
+                <div id="conversion-list" class="conversion-list"></div>
 
                 <div class="add-food-section">
                     <h4>Add New Food Type</h4>
-                    <input type="text" id="new-food-name" placeholder="Food name">
-                    <input type="number" id="new-food-value" placeholder="Cricket equivalents" min="0.1" step="0.1">
-                    <button id="add-food-btn">Add Food</button>
+                    <div class="add-food-inputs">
+                        <input type="text" id="new-food-name" placeholder="Food name">
+                        <input type="number" id="new-food-value" placeholder="Value" min="0.1" step="0.1">
+                        <button id="add-food-btn" class="add-btn">Add</button>
+                    </div>
                 </div>
 
                 <button id="save-settings" class="save-btn">Save Settings</button>

@@ -23,7 +23,10 @@ function loadSettings() {
     }
     const savedQuantities = localStorage.getItem('spikeFeederQuantities');
     if (savedQuantities) {
-        quantities = JSON.parse(savedQuantities);
+        const parsed = JSON.parse(savedQuantities);
+        for (const food in quantities) {
+            if (parsed[food] !== undefined) quantities[food] = parsed[food];
+        }
     }
 }
 
@@ -83,22 +86,33 @@ function updateDisplay() {
     
     const percentage = (total / goal) * 100;
     const progressFill = document.getElementById('progress-fill');
+    const dragonImg = document.getElementById('dragon-img');
+    
+    // Allow progress past 100%
     progressFill.style.width = `${Math.min(percentage, 100)}%`;
+    
+    if (total > goal) {
+        progressFill.classList.add('over');
+        dragonImg.classList.add('over');
+    } else {
+        progressFill.classList.remove('over');
+        dragonImg.classList.remove('over');
+    }
     
     // Update ticks
     const ticksContainer = document.getElementById('progress-ticks');
     ticksContainer.innerHTML = '';
     
-    // Create goal - 1 spaces between start and end
-    for (let i = 0; i < goal; i++) {
-        const spacer = document.createElement('div');
-        spacer.style.flex = "1";
-        ticksContainer.appendChild(spacer);
+    // Create goal spaces between start and end (total goal+1 ticks)
+    for (let i = 0; i <= goal; i++) {
+        const tick = document.createElement('div');
+        tick.className = 'tick';
+        ticksContainer.appendChild(tick);
         
-        if (i < goal - 1) {
-            const tick = document.createElement('div');
-            tick.className = 'tick';
-            ticksContainer.appendChild(tick);
+        if (i < goal) {
+            const spacer = document.createElement('div');
+            spacer.style.flex = "1";
+            ticksContainer.appendChild(spacer);
         }
     }
 }
@@ -118,7 +132,7 @@ function renderConversionSettings() {
                    step="0.1"
                    data-food="${food}"
                    class="conversion-input">
-            <button onclick="removeFood('${food}')">×</button>
+            <button class="remove-btn" onclick="removeFood('${food}')">×</button>
         `;
         container.appendChild(div);
     }

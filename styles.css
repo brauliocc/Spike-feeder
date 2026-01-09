@@ -47,6 +47,11 @@ h1 {
     max-width: 100%;
     height: auto;
     border-radius: 20px;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dragon-image.over {
+    transform: rotate(180deg);
 }
 
 .progress-container {
@@ -71,7 +76,11 @@ h1 {
     height: 100%;
     width: 0%;
     background: #6bcb77;
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+}
+
+.progress-fill.over {
+    background: #ff4d4d;
 }
 
 .ticks {
@@ -84,17 +93,20 @@ h1 {
     justify-content: space-between;
     z-index: 2;
     pointer-events: none;
-    padding: 0 20px;
+    padding: 0;
 }
 
 .tick {
     width: 1px;
     height: 100%;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .food-inputs {
     margin-top: 30px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 5px;
 }
 
 .food-item {
@@ -189,11 +201,21 @@ h1 {
 
 .modal-content {
     background: white;
-    padding: 40px;
-    border-radius: 30px;
-    max-width: 500px;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 450px;
     width: 90%;
     position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content h2 {
+    font-size: 1.5rem;
+    color: #2d5016;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .close-btn {
@@ -207,29 +229,105 @@ h1 {
 }
 
 .setting-group {
-    margin: 20px 0;
+    margin-bottom: 20px;
+}
+
+.setting-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 5px;
 }
 
 .setting-group input {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #eee;
+    background: #f9f9f9;
     border-radius: 10px;
-    margin-top: 5px;
+    font-size: 1rem;
+}
+
+.conversion-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 5px;
 }
 
 .conversion-item {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 10px 0;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fdfdfd;
+    border-radius: 10px;
+    border: 1px solid #f0f0f0;
+}
+
+.conversion-item span {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
 .conversion-item input {
-    width: 60px;
+    width: 70px;
     padding: 8px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.add-food-section {
+    background: #f0f4ee;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.add-food-section h4 {
+    font-size: 0.9rem;
+    color: #2d5016;
+    margin-bottom: 12px;
+}
+
+.add-food-inputs {
+    display: flex;
+    gap: 8px;
+}
+
+.add-food-inputs input {
+    flex: 1;
+    padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.add-food-inputs input[type="number"] {
+    flex: 0 0 70px;
+}
+
+.add-btn {
+    padding: 10px 15px;
+    background: #2d5016;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .save-btn {
@@ -242,6 +340,7 @@ h1 {
     font-weight: bold;
     margin-top: 20px;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 @media (max-width: 500px) {
