@@ -105,11 +105,17 @@ function updateDisplay() {
     
     // Create goal spaces between start and end (total goal+1 ticks)
     for (let i = 0; i <= goal; i++) {
-        // Skip first and last ticks to avoid the rounded edges
+        // Show all ticks except the absolute first and absolute last
         if (i > 0 && i < goal) {
             const tick = document.createElement('div');
             tick.className = 'tick';
             ticksContainer.appendChild(tick);
+        } else {
+            // Invisible placeholder to keep spacing consistent
+            const placeholder = document.createElement('div');
+            placeholder.style.width = "1px";
+            placeholder.style.height = "100%";
+            ticksContainer.appendChild(placeholder);
         }
         
         if (i < goal) {
